@@ -177,6 +177,49 @@ void task6() {
     std::cout << std::endl;
 }
 
+
+// Завдання 7: сума і середнє без accumulate
+void task7() {
+    std::cout << "\n=== Task 7: sum and average + lambda ===" << std::endl;
+
+    std::vector<int> nums = { 4, 8, 15, 16, 23, 42, 7, 3, 11, 9 };
+
+    int sum = 0;
+    int count = 0;
+
+    // за посиланням — щоб лямбда могла їх змінювати
+    std::for_each(nums.begin(), nums.end(),
+        [&sum, &count](int n) {
+            sum += n;
+            count++;
+        });
+
+    double average = static_cast<double>(sum) / count;
+
+    std::cout << "Sum: " << sum << std::endl;
+    std::cout << "Count: " << count << std::endl;
+    std::cout << "Average: " << average << std::endl;
+}
+
+
+
+// Завдання 8: підрахунок голосних у рядку
+void task8() {
+    std::cout << "\n=== Task 8: count vowels + lambda ===" << std::endl;
+
+    std::string text = "Hello World from STL algorithms";
+
+    std::cout << "Text: " << text << std::endl;
+
+    int vowelCount = std::count_if(text.begin(), text.end(),
+        [](char c) {
+            std::string vowels = "aeiouAEIOU";
+            return vowels.find(c) != std::string::npos;
+        });
+
+    std::cout << "Vowel count: " << vowelCount << std::endl;
+}
+
 int main() {
     task1();
     task2();
@@ -184,6 +227,8 @@ int main() {
 	task4();
 	task5();
 	task6();
+	task7();
+	task8();
     std::cin.get();
     return 0;
 }
