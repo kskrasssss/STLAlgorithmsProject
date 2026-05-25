@@ -100,10 +100,40 @@ void task3() {
 }
 
 
+// Завдання 4: count_if + фанктор WithinRange
+struct WithinRange {
+    int minVal;
+    int maxVal;
+
+    WithinRange(int mn, int mx) : minVal(mn), maxVal(mx) {}
+
+    // Повертає true якщо n між minVal і maxVal включно
+    bool operator()(int n) const {
+        return n >= minVal && n <= maxVal;
+    }
+};
+
+void task4() {
+    std::cout << "\n=== Task 4: count_if + functor ===" << std::endl;
+
+    std::set<int> numbers = { 3, 7, 12, 25, 38, 41, 55, 67, 80, 95 };
+
+    std::cout << "Set: ";
+    for (auto it = numbers.begin(); it != numbers.end(); ++it)
+        std::cout << *it << " ";
+    std::cout << std::endl;
+
+    // WithinRange(20, 70) — фанктор для діапазону [20, 70]
+    int count = std::count_if(numbers.begin(), numbers.end(), WithinRange(20, 70));
+
+    std::cout << "Count in [20, 70]: " << count << std::endl;
+}
+
 int main() {
     task1();
     task2();
     task3();
+	task4();
     std::cin.get();
     return 0;
 }
