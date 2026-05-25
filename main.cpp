@@ -129,11 +129,61 @@ void task4() {
     std::cout << "Count in [20, 70]: " << count << std::endl;
 }
 
+// Завдання 5: map складу, показати кількість > 100
+void task5() {
+    std::cout << "\n=== Task 5: for_each + lambda ===" << std::endl;
+
+    std::map<std::string, int> warehouse = {
+        {"apples",  150},
+        {"bananas",  80},
+        {"oranges", 200},
+        {"grapes",   45},
+        {"lemons",  110}
+    };
+
+    std::cout << "Items with quantity > 100:" << std::endl;
+
+    // Лямбда приймає пару {key, value} з map
+    // auto& pair — щоб не копіювати
+    std::for_each(warehouse.begin(), warehouse.end(),
+        [](const std::pair<std::string, int>& item) {
+            if (item.second > 100) {
+                std::cout << "  " << item.first
+                    << ": " << item.second << std::endl;
+            }
+        });
+}
+
+
+
+// Завдання 6: замінити від'ємні числа на 0
+void task6() {
+    std::cout << "\n=== Task 6: replace_if + lambda ===" << std::endl;
+
+    std::vector<int> nums = { 3, -1, 4, -1, 5, -9, 2, 6, -5, 3 };
+
+    std::cout << "Before: ";
+    for (auto it = nums.begin(); it != nums.end(); ++it)
+        std::cout << *it << " ";
+    std::cout << std::endl;
+
+    std::replace_if(nums.begin(), nums.end(),
+        [](int n) { return n < 0; },
+        0);
+
+    std::cout << "After (negatives ? 0): ";
+    for (auto it = nums.begin(); it != nums.end(); ++it)
+        std::cout << *it << " ";
+    std::cout << std::endl;
+}
+
 int main() {
     task1();
     task2();
     task3();
 	task4();
+	task5();
+	task6();
     std::cin.get();
     return 0;
 }
